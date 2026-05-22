@@ -1,3 +1,7 @@
+//Architectural pattern: MVC, DI, MVP
+
+//Design pattern: Middleware, Decotar
+
 console.log("Executed");
 
 import moment from 'moment';
