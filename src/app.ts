@@ -1,9 +1,10 @@
 import express from 'express';
-import { defaultFormat } from 'moment';
 import path from 'path';
+import router from './router';
+import routerAdmin from './routerAdmin';
+
 /**1- ENTANCE */
 const app = express();
-console.log("__dirname", __dirname);
 app.use(express.static(path.join(__dirname,'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -13,6 +14,10 @@ app.use(express.json());
 /** 3-Views */
 app.set('views', path.join(__dirname,'views'));
 app.set('view engine', "ejs")
+
 /** 4- Routers*/
+//BSSR: EJS
+app.use('/admin', routerAdmin);    //SSR: EJS
+app.use('/', router)              // SPA: REACT
 
 export default app;
