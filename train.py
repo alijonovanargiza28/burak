@@ -1,10 +1,21 @@
-#TASK N
-def palindromCheck(word):
-    reversed_word = word[::-1]
-    return word == reversed_word
+#Task O
+def calculateSumOfNumbers(arr):
+    count = 0
+    for x in arr:
+        if type(x)==int or type(x)==float:
+            count += x 
+    return count
 
-print(palindromCheck("dad"))     
-print(palindromCheck("level"))   
+print(calculateSumOfNumbers([10,50, "20", True , 5.5,-1]))
+    
+
+#TASK N
+# def palindromCheck(word):
+#     reversed_word = word[::-1]
+#     return word == reversed_word
+
+# print(palindromCheck("dad"))     
+# print(palindromCheck("level"))   
     
 
 #TASK M
