@@ -1,12 +1,22 @@
-#Task O
-def calculateSumOfNumbers(arr):
-    count = 0
-    for x in arr:
-        if type(x)==int or type(x)==float:
-            count += x 
-    return count
+#TASK P
+def object_to_array(obj):
+    result = []
+    for key, value in obj.items():
+        result.append([key, value])
+    return result
+    
+print(object_to_array({"a":10, "b":30, "c":40}))
 
-print(calculateSumOfNumbers([10,50, "20", True , 5.5,-1]))
+
+#Task O
+# def calculateSumOfNumbers(arr):
+#     count = 0
+#     for x in arr:
+#         if type(x)==int or type(x)==float:
+#             count += x 
+#     return count
+
+# print(calculateSumOfNumbers([10,50, "20", True , 5.5,-1]))
     
 
 #TASK N
