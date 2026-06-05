@@ -10,4 +10,8 @@ routerAdmin
 .get('/signup', restaurantController.getSignup)
 .post("/signup", restaurantController.processSignup)
 
+routerAdmin.get('/', (req, res) => {
+  res.send("Home");
+});
+
 export default routerAdmin;

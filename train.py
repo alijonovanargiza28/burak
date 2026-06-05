@@ -1,11 +1,20 @@
+# TASK Q
+def hasProperty(obj, prop):
+    if prop in obj:
+        return True
+    return False
+
+print(hasProperty({"name": "BMW"}, "name"))
+print(hasProperty({"color":"PINK"}, "year"))
+
 #TASK P
-def object_to_array(obj):
-    result = []
-    for key, value in obj.items():
-        result.append([key, value])
-    return result
+# def object_to_array(obj):
+#     result = []
+#     for key, value in obj.items():
+#         result.append([key, value])
+#     return result
     
-print(object_to_array({"a":10, "b":30, "c":40}))
+# print(object_to_array({"a":10, "b":30, "c":40}))
 
 
 #Task O

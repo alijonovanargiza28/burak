@@ -4,6 +4,7 @@ import router from './router';
 import routerAdmin from './routerAdmin';
 import morgan from "morgan";
 import {MORGAN_FORMAT} from "./libs/config";
+
 /**1- ENTANCE */
 const app = express();
 app.use(express.static(path.join(__dirname,'public')));

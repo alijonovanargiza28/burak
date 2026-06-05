@@ -1,34 +1,44 @@
 import {Request, Response} from 'express';
 import {T} from "../libs/types/common";
+import MemberService  from '../models/Member.service';
+import { LoginInput, Member, MemberInput } from '../libs/types/member';
 
+
+const memberService = new MemberService();
+
+
+const memberController: T ={}
 //REACT
 
-const memberController: T ={};
+memberController.Signup = async(req:Request, res: Response)=>{
+    try{ 
+        console.log("Signup")
+        const input:MemberInput = req.body
 
-// memberController.goHome = (req:Request, res: Response)=>{
-//     try{
-//         res.send("Home Page")
-//     }catch(err){
-//         console.log("Error, goHome", err)
-//     }
-// }
+        console.log("COMPUTER",req.body)
 
-// memberController.getlogin = (req:Request, res: Response)=>{
-//     try{
-//         res.send("Login Page")
-//     }catch(err){
-//         console.log("Error, getlogin", err)
-//     }
-// }
+        const result: Member = await memberService.Signup(input);
+        console.log(result)
+        res.json({member:result})
+        }catch(err){
+        console.log("Error,Signup", err)
+        res.json({err})
+    }
+};
 
+memberController.Login = async(req:Request, res: Response)=>{
+    try{
+        console.log("Login")
+        const input:LoginInput = req.body,
+        result = await memberService.Login(input);
 
-// memberController.getSignup = (req:Request, res: Response)=>{
-//     try{
-//         res.send("SignUp")
-//     }catch(err){
-//         console.log("Error, getSignup", err)
-//     }
-// };
+        res.json({member:result})
+    }catch(err){
+        console.log("Error, Login", err)
+        res.send(err)
+    }
+};
+
 
 export default memberController;
 
