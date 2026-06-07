@@ -17,6 +17,7 @@ UPDATE_FAILED = "Update is failed!",
 USED_NICK_PHONE="you are inserting already used nick or phone!",
 NO_MEMBER_NICK ="No member with that member nick!",
 WRONG_PASSWORD ="Wrong password insered please try again!",
+NOT_AUTHENTICATED ="You are not authenticated, Please login first"
 }
 class Errors extends Error {
 public code: HttpCode; 
