@@ -1,11 +1,27 @@
-# TASK Q
-def hasProperty(obj, prop):
-    if prop in obj:
-        return True
-    return False
+#TASK R
+def calculate(expression):
+    a, operator, b = expression.split()
 
-print(hasProperty({"name": "BMW"}, "name"))
-print(hasProperty({"color":"PINK"}, "year"))
+    if operator == "+":
+        return int(a) + int(b)
+    elif operator == "-":
+        return int(a) - int(b)
+    elif operator == "*":
+        return int(a) * int(b)
+    elif operator == "/":
+        return int(a) / int(b)
+
+print(calculate("1 + 3"))   
+
+
+# TASK Q
+# def hasProperty(obj, prop):
+#     if prop in obj:
+#         return True
+#     return False
+
+# print(hasProperty({"name": "BMW"}, "name"))
+# print(hasProperty({"color":"PINK"}, "year"))
 
 #TASK P
 # def object_to_array(obj):
