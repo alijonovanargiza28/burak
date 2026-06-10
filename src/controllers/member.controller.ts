@@ -14,11 +14,8 @@ memberController.Signup = async(req:Request, res: Response)=>{
     try{ 
         console.log("Signup")
         const input:MemberInput = req.body
-
-        console.log("COMPUTER",req.body)
-
         const result: Member = await memberService.Signup(input);
-        console.log(result)
+     
         res.json({member:result})
         }catch(err){
         console.log("Error,Signup", err)

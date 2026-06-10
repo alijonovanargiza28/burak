@@ -22,6 +22,7 @@ NOT_AUTHENTICATED ="You are not authenticated, Please login first"
 class Errors extends Error {
 public code: HttpCode; 
 public message: Message;
+    static standard: any;
 
 constructor(statusCode: HttpCode, statusMessage: Message) {
 super();
