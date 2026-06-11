@@ -1,17 +1,29 @@
+#TASK S
+def missingNumber(nums):
+    nums.sort()
+
+    for i in range(len(nums) - 1):
+        if nums[i + 1] != nums[i] + 1:
+            return nums[i] + 1
+
+print(missingNumber([1, 3]))      
+print(missingNumber([3, 4, 6]))   
+print(missingNumber([7, 8, 10])) 
+print(missingNumber([3,0,1])) 
 #TASK R
-def calculate(expression):
-    a, operator, b = expression.split()
+# def calculate(expression):
+#     a, operator, b = expression.split()
 
-    if operator == "+":
-        return int(a) + int(b)
-    elif operator == "-":
-        return int(a) - int(b)
-    elif operator == "*":
-        return int(a) * int(b)
-    elif operator == "/":
-        return int(a) / int(b)
+#     if operator == "+":
+#         return int(a) + int(b)
+#     elif operator == "-":
+#         return int(a) - int(b)
+#     elif operator == "*":
+#         return int(a) * int(b)
+#     elif operator == "/":
+#         return int(a) / int(b)
 
-print(calculate("1 + 3"))   
+# print(calculate("1 + 3"))   
 
 
 # TASK Q
