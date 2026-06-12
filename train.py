@@ -1,15 +1,8 @@
-#TASK S
-def missingNumber(nums):
-    nums.sort()
+#TASK T
+def mergeSortedArrays(arr1, arr2):
+    return sorted(arr1 + arr2)
 
-    for i in range(len(nums) - 1):
-        if nums[i + 1] != nums[i] + 1:
-            return nums[i] + 1
-
-print(missingNumber([1, 3]))      
-print(missingNumber([3, 4, 6]))   
-print(missingNumber([7, 8, 10])) 
-print(missingNumber([3,0,1])) 
+print(mergeSortedArrays([0, 3, 4], [4, 6]))
 #TASK R
 # def calculate(expression):
 #     a, operator, b = expression.split()
