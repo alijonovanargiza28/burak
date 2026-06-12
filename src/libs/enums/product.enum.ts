@@ -12,6 +12,7 @@ export enum ProductVolume{
     ONE_POINT_FIVE=1.5,
     TWO=2,
 }
+
 export enum ProductStatus{
     PAUSE ='PAUSE',
     PROCESS='PROCESS',

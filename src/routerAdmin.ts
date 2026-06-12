@@ -1,9 +1,8 @@
 import express from 'express';
-const routerAdmin = express.Router();
 import restaurantController from './controllers/restaurant.controller';
+import makeUploader from './libs/utils/uploader';
 import productController from './controllers/product.controller';
-import makeUploader from "./libs/utils/uploader"
-
+const routerAdmin = express.Router();
 routerAdmin.get('/', restaurantController.goHome)
 routerAdmin
 .get('/login', restaurantController.getLogin)
@@ -26,9 +25,13 @@ routerAdmin
 routerAdmin.get('/product/all', restaurantController.verifyRestaurant, productController.getAllProducts)
 routerAdmin.post("/product/create",
    restaurantController.verifyRestaurant,
-    makeUploader("products").single("productImages"),
-    productController.createNewProduct)
-routerAdmin.post("/product/:id", restaurantController.verifyRestaurant, productController.updateChosenProduct)
+    makeUploader("products").array("productImages",5),
+    productController.createNewProduct
+    )
+  
+routerAdmin.post("/product/:id", 
+  restaurantController.verifyRestaurant, 
+  productController.updateChosenProduct)
 
 
 export default routerAdmin;
