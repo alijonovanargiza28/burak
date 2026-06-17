@@ -7,11 +7,8 @@ import bcrypt from "bcryptjs";
 import { shapeIntoMongooseObject } from "../libs/config";
 
 class MemberService{
-    static getUsers() {
-        throw new Error('Method not implemented.');
-    }
-    private readonly memberModel;
 
+    private readonly memberModel;
     constructor(){
         this.memberModel = MemberModule;
     }
@@ -20,8 +17,6 @@ class MemberService{
     public async Signup(input:MemberInput):Promise<Member>{
         const salt = await bcrypt.genSalt();
         input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
-
-
         try{
             const result = await this.memberModel.create(input)
             result.memberPassword = "";
@@ -31,6 +26,7 @@ class MemberService{
            throw new Errors(HttpCode.BAD_REQUEST, Message.USED_NICK_PHONE );
         }   
     }
+
     public async Login(input:LoginInput):Promise<Member>{
    const member = await this.memberModel
    .findOne(
@@ -50,13 +46,11 @@ class MemberService{
     if(!isMatch){
     throw new Errors(HttpCode.UNAUTHORIZED, Message.WRONG_PASSWORD)
     }
-  return await this.memberModel.findById(member._id).lean().exec();
+    return await this.memberModel.findById(member._id).lean().exec();
 
     }
 
-
     /*SSR*/
-
         public async processSignup(input:MemberInput):Promise<Member>{
         const exits = await this.memberModel
         .findOne({memberType:MemberType.RESTAURANT})
@@ -66,9 +60,7 @@ class MemberService{
         const salt = await bcrypt.genSalt();
         input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
         console.log("After:", input.memberPassword)
-
-
-        try{
+          try{
             const result = await this.memberModel.create(input)
             result.memberPassword = "";
             return result;
@@ -76,13 +68,13 @@ class MemberService{
            throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED );
         }   
     }
+
     public async processLogin(input:LoginInput):Promise<Member>{
    const member = await this.memberModel
    .findOne(
     {memberNick: input.memberNick},
      {memberNick:1, memberPassword:1})
    .exec();
-
    if(!member)throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK)
 
 
@@ -99,13 +91,12 @@ class MemberService{
   return await this.memberModel.findById(member._id).exec();
 
     }
+
     public async getUsers():Promise<Member[]>{
         const result = await this.memberModel
         .find({memberType:MemberType.USER})
         .exec();
-        
     if(!result)throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
-
     return result;
     }
     public async updateChosenUser(input:MemberUpdateInput):Promise<Member>{

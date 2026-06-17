@@ -6,6 +6,7 @@ import { MemberType } from '../libs/enums/member.enum';
 import { LoginInput } from '../libs/types/member';
 import Errors, { HttpCode, Message } from '../libs/Errors';
 
+
 const memberService = new MemberService();
 
 const restaurantController: T ={};
@@ -69,9 +70,8 @@ restaurantController.processSignup = async(req:AdminRequest, res: Response)=>{
         const message 
         = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG
         res.send(
-            `<script>alert("${message}"):window.location.replace('admin/signup')</script>`
+            `<script>alert("${message}");window.location.replace('signup')</script>`
         );
-        res.send(err);
     }
 };
 
@@ -91,7 +91,7 @@ restaurantController.processLogin = async(req:AdminRequest, res: Response)=>{
         const message 
         = err instanceof Errors ? err.message : Message.SOMETHING_WENT_WRONG
         res.send(
-            `<script>alert("${message}"):window.location.replace('admin/login')</script>`
+            `<script>alert("${message}");window.location.replace('login')</script>`
         );
     }
 };
@@ -111,8 +111,8 @@ restaurantController.logout = async(req:AdminRequest, res: Response)=>{
 restaurantController.getUsers = async(req: Request, res: Response) => {
     try {
        console.log("getUsers")
-     const result = await MemberService.getUsers();
-console.log("result", result)
+     const result = await memberService.getUsers();
+       console.log("result", result)
      res.render("users", {users: result})
     } catch (err) {
         console.log("getUsers",err);
@@ -162,7 +162,7 @@ restaurantController.verifyRestaurant =(
     }else {
         const message = Message.NOT_AUTHENTICATED
        res.send
-       (`<script>alert("${message}"); window.location.replace('/admin/login')</script>`);
+       (`<script>alert("${message}"); window.location.replace('login')</script>`);
     }
     }
     
