@@ -8,6 +8,7 @@ const memberService = new MemberService();
 
 
 const memberController: T ={}
+
 //REACT
 
 memberController.Signup = async(req:Request, res: Response)=>{
