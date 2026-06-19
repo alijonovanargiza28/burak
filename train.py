@@ -1,8 +1,19 @@
-#TASK T
-def mergeSortedArrays(arr1, arr2):
-    return sorted(arr1 + arr2)
+#TASK V
+text = "banana"
+result = {}
 
-print(mergeSortedArrays([0, 3, 4], [4, 6]))
+for harf in text:
+    if harf in result:
+        result[harf] = result[harf] + 1
+    else:
+        result[harf] = 1
+
+print(result)
+
+# def mergeSortedArrays(arr1, arr2):
+#     return sorted(arr1 + arr2)
+
+# print(mergeSortedArrays([0, 3, 4], [4, 6]))
 #TASK R
 # def calculate(expression):
 #     a, operator, b = expression.split()
