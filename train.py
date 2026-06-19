@@ -7,8 +7,8 @@ for harf in text:
         result[harf] = result[harf] + 1
     else:
         result[harf] = 1
-
-print(result)
+        
+# print(result)
 
 # def mergeSortedArrays(arr1, arr2):
 #     return sorted(arr1 + arr2)

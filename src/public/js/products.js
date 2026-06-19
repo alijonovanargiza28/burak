@@ -1,5 +1,28 @@
 console.log("Products frontend javascript file");
 
+$(function(){
+    $(".product-collection").on("change",()=>{
+        const selectedValue = $(".product-collection").val();
+        if(selectedValue === "DRINK"){
+        $("#product-collection").hide()
+          $("#product-volume").show();
+         
+        }else{
+             $("#product-volume").hide();
+          $("#product-collection").show()
+        }
+    })
+    $("#process-btn").on("click", ()=>{
+        $(".dish-container").slideToggle(500);
+        $("#process-btn").css("display", "none")
+    })
+
+    $("#cancel-btn").on("click", ()=>{
+        $(".dish-container").slideToggle(500);
+        $("#process-btn").css("display", "flex")
+    })
+})
+
 function validateForm() {
     const productName = $(".product-name").val();
     const productPrice = $(".product-price").val();
