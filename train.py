@@ -1,12 +1,25 @@
-#TASK V
-text = "banana"
-result = {}
+#TASK W
+def chunkArray(arr, size):
+    result = []
 
-for harf in text:
-    if harf in result:
-        result[harf] = result[harf] + 1
-    else:
-        result[harf] = 1
+    for i in range(0, len(arr), size):
+        result.append(arr[i:i + size])
+
+    return result
+
+
+print(chunkArray([1, 2, 3, 4, 6], 2))
+
+
+#TASK V
+# text = "banana"
+# result = {}
+
+# for harf in text:
+#     if harf in result:
+#         result[harf] = result[harf] + 1
+#     else:
+#         result[harf] = 1
         
 # print(result)
 

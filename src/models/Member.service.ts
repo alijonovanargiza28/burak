@@ -1,5 +1,4 @@
-
-import { MemberType } from "../libs/enums/member.enum";
+import { MemberStatus, MemberType } from "../libs/enums/member.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { LoginInput, Member, MemberInput, MemberUpdateInput } from "../libs/types/member";
 import MemberModule from "../schema/Member.module";
@@ -30,12 +29,14 @@ class MemberService{
     public async Login(input:LoginInput):Promise<Member>{
    const member = await this.memberModel
    .findOne(
-    {memberNick: input.memberNick},
-     {memberNick:1, memberPassword:1})
+    {memberNick: input.memberNick, memberStatus:{ $ne: MemberStatus.DELETE}},
+     {memberNick:1, memberPassword:1, memberStatus:1})
    .exec();
 
    if(!member)throw new Errors(HttpCode.NOT_FOUND, Message.NO_MEMBER_NICK)
-
+  else if(member.memberStatus === MemberStatus.BLOCK){
+throw new Errors(HttpCode.FORBIDDEN, Message.BLOCKED_USER);
+}
     const isMatch = await bcrypt.compare(
         input.memberPassword, 
         member.memberPassword
@@ -55,7 +56,6 @@ class MemberService{
         const exits = await this.memberModel
         .findOne({memberType:MemberType.RESTAURANT})
         .exec();
-
         if(exits)  throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED );
         const salt = await bcrypt.genSalt();
         input.memberPassword = await bcrypt.hash(input.memberPassword, salt);
@@ -106,7 +106,6 @@ class MemberService{
         .exec(); 
         
     if(!result)throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
-
     return result;
     }
     

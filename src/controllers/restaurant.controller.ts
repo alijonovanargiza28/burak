@@ -50,7 +50,7 @@ restaurantController.getLogin = (req: Request, res: Response) => {
 restaurantController.processSignup = async(req:AdminRequest, res: Response)=>{
     try{
         console.log("processSignup")
-        console.log("req,body", req.body)
+        console.log("req.body", req.body)
         const file = req.file;
         if(!file)
             throw new Errors(HttpCode.BAD_REQUEST, Message.SOMETHING_WENT_WRONG)
@@ -117,7 +117,7 @@ restaurantController.getUsers = async(req: Request, res: Response) => {
      res.render("users", {users: result})
     } catch (err) {
         console.log("getUsers",err);
-        res.redirect("/admin/login")
+        res.redirect("/admin")
     }
 };
 
@@ -163,7 +163,7 @@ restaurantController.verifyRestaurant =(
     }else {
         const message = Message.NOT_AUTHENTICATED
        res.send
-       (`<script>alert("${message}"); window.location.replace('login')</script>`);
+       (`<script>alert("${message}"); window.location.replace('/admin/login')</script>`);
     }
     }
     
