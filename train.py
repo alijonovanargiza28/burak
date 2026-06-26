@@ -1,24 +1,33 @@
+#TASK Y
+def test(a, b):
+    c = []
+
+    for x in a:
+        if x in b:
+            c.append(x)
+    return c
+print(test([2,3,4],[4,3,5]))
 #TASK X
-def test(obj, key):
-    count = 0
+# def test(obj, key):
+#     count = 0
 
-    for x in obj:
-        if x == key:
-            count += 1
+#     for x in obj:
+#         if x == key:
+#             count += 1
 
-        if isinstance(obj[x], dict):
-            count += test(obj[x], key)
+#         if isinstance(obj[x], dict):
+#             count += test(obj[x], key)
 
-    return count
-print(test({
-    "model": "hello",
-    "m": 5,
-    "c": {
-        "model": "b","b":{
-            "model":7
-        }
-    }
-}, "model"))
+#     return count
+# print(test({
+#     "model": "hello",
+#     "m": 5,
+#     "c": {
+#         "model": "b","b":{
+#             "model":7
+#         }
+#     }
+# }, "model"))
 
 #TASK W
 # def chunkArray(arr, size):
