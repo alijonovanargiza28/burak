@@ -1,12 +1,27 @@
-#TASK Y
-def test(a, b):
-    c = []
+#TASK Z
+def juft(arr):
+    total = 0
 
-    for x in a:
-        if x in b:
-            c.append(x)
-    return c
-print(test([2,3,4],[4,3,5]))
+    for num in arr:
+        if num % 2 == 0:
+            total += num
+
+    return total
+
+
+print(juft([1, 8, 3]))   
+print(juft([4,6,9]))
+
+
+#TASK Y
+# def test(a, b):
+#     c = []
+
+#     for x in a:
+#         if x in b:
+#             c.append(x)
+#     return c
+# print(test([2,3,4],[4,3,5]))
 #TASK X
 # def test(obj, key):
 #     count = 0
