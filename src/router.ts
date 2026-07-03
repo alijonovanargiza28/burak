@@ -2,9 +2,31 @@ import express from 'express';
 const router = express.Router();
 import memberController from './controllers/member.controller';
 
-router.post("/login", memberController.Login)
+//MEMBER
+router.post("/member/login", memberController.Login);
 
-router.post("/signup", memberController.Signup)
+router.post("/member/signup", memberController.Signup);
+
+router.get("/member/detail", memberController.verifyAuth)
+
+//PRODUCT
+
+
+
+
+//ORDER
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // router.get('/', memberController.goHome);
