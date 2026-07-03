@@ -3,11 +3,21 @@ const router = express.Router();
 import memberController from './controllers/member.controller';
 
 //MEMBER
-router.post("/member/login", memberController.Login);
+router.post("/member/login", 
+    memberController.Login);
 
-router.post("/member/signup", memberController.Signup);
+router.post("/member/signup", 
+    memberController.Signup);
 
-router.get("/member/detail", memberController.verifyAuth)
+router.post("/member/logout", 
+    memberController.verifyAuth, 
+    memberController.logout)
+
+router.get("/member/detail", 
+    memberController.verifyAuth,
+    memberController.getMemberDetail
+
+ )
 
 //PRODUCT
 
