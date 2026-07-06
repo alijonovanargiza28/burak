@@ -4,6 +4,9 @@ import memberController from './controllers/member.controller';
 import makeUploader from './libs/utils/uploader';
 
 //MEMBER
+router.get("/member/restaurant",
+   memberController.getRestaurant)
+
 router.post("/member/login", 
     memberController.Login);
 
@@ -30,25 +33,8 @@ router.get("/member/detail",
    "/member/top-users",
    memberController.getTopUsers,
  );
-//PRODUCT
 
-
-
-
-//ORDER
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 // router.get('/', memberController.goHome);
 
