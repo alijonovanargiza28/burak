@@ -2,6 +2,8 @@ import express from 'express';
 const router = express.Router();
 import memberController from './controllers/member.controller';
 import makeUploader from './libs/utils/uploader';
+import productController from './controllers/product.controller';
+
 
 //MEMBER
 router.get("/member/restaurant",
@@ -33,7 +35,10 @@ router.get("/member/detail",
    "/member/top-users",
    memberController.getTopUsers,
  );
-
+router.get(
+    "/product/all",
+    productController.getproduct
+)
  
 
 // router.get('/', memberController.goHome);

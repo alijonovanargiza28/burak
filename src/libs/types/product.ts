@@ -41,3 +41,10 @@ export interface ProductUpdateInput{
     productViews?:number;
 }
 
+export interface ProductInquery {
+  order: string;
+  page: number;
+  limit: number;
+  productCollection?: ProductCollection;
+  search?:string;
+}

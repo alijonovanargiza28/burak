@@ -80,7 +80,7 @@ memberController.getMemberDetail = async(req: ExtendedRequest, res: Response) =>
 };
 
 
-
+//3
 memberController.getTopUsers = async (req: Request, res: Response) => {
   try {
     console.log("getTopUsers");
@@ -128,7 +128,7 @@ memberController.retrieveAuth = async (
    next();
   }
 };
-
+//1
 memberController.updateMember= async(req:ExtendedRequest, res:Response)=>{
   try {
     console.log("updateMember");
@@ -143,7 +143,7 @@ memberController.updateMember= async(req:ExtendedRequest, res:Response)=>{
   }
   }
 
-
+//2
 memberController.getRestaurant = async (req: Request, res: Response) => {
   try {
     console.log("getRestaurant");
