@@ -35,10 +35,14 @@ router.get("/member/detail",
    "/member/top-users",
    memberController.getTopUsers,
  );
+
+
+router.get("/products/all", productController.getProducts);
 router.get(
-    "/product/all",
-    productController.getproduct
-)
+  "/product/:id",
+  memberController.retrieveAuth,
+  productController.getProduct,
+);
  
 
 // router.get('/', memberController.goHome);
