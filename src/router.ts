@@ -38,6 +38,8 @@ router.get("/member/detail",
 
 
 router.get("/products/all", productController.getProducts);
+
+
 router.get(
   "/product/:id",
   memberController.retrieveAuth,
