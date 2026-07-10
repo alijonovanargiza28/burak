@@ -81,21 +81,33 @@ class MemberService {
     const result = await this.memberModel
       .find({ memberStatus: MemberStatus.ACTIVE, memberPoints: { $gte: 1 } })
       .sort({ memberPoints: -1 })
-      .limit(4).exec()
-    
-    if(!result)throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND)
-        return result
+      .limit(4)
+      .exec();
+
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
   }
-  public async getRestaurant():Promise<Member>{
+  public async getRestaurant(): Promise<Member> {
     const result = await this.memberModel
-    .findOne({memberType:MemberType.RESTAURANT})
-    .lean()
-    .exec()
+      .findOne({ memberType: MemberType.RESTAURANT })
+      .lean()
+      .exec();
 
-    if(!result)throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND)
-        return result
+    if (!result) throw new Errors(HttpCode.NOT_FOUND, Message.NO_DATA_FOUND);
+    return result;
   }
+  public async addUserPoint(member: Member, point: number): Promise<Member> {
+    const memberId = shapeIntoMongooseObject(member._id);
 
+    return await this.memberModel.findByIdAndUpdate({
+      _id: memberId,
+      memberType: MemberType.USER,
+      memberStatus: MemberStatus.ACTIVE,
+    },
+    {$inc:{memberPoints:point}},
+    {new:true}
+  ).exec()
+  }
 
   /*SSR*/
   public async processSignup(input: MemberInput): Promise<Member> {

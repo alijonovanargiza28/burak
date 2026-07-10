@@ -33,6 +33,8 @@ router.post(
 
 router.get("/member/top-users", memberController.getTopUsers);
 
+// PRODUCT
+
 router.get("/products/all", productController.getProducts);
 
 router.get(
@@ -41,15 +43,26 @@ router.get(
   productController.getProduct,
 );
 
+// ORDER
+
 router.post(
   "/order/create",
   memberController.verifyAuth,
   orderController.createOrder,
 );
 
-router.get("/order/all", memberController.verifyAuth,
-    orderController.getMyOrders
+router.get(
+  "/order/all",
+  memberController.verifyAuth,
+  orderController.getMyOrders,
+);
+
+router.post(
+    "/order/update",
+    memberController.verifyAuth,
+    orderController.updateOrder
 )
+
 // router.get('/', memberController.goHome);
 
 // router.get('/login', memberController.getlogin);
