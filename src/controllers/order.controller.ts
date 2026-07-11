@@ -50,7 +50,7 @@ orderController.updateOrder = async (req: ExtendedRequest, res: Response) => {
     const input:OrderUpdateInput= req.body;
      
 
-     res.status(HttpCode.CREATED).json({ result });
+     res.status(HttpCode.CREATED).json({ input});
     }
     catch (err) {
     console.log("Error,createOrder", err);
