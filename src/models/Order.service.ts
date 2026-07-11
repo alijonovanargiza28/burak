@@ -2,7 +2,7 @@ import OrderItemModel from "../schema/OrderItem.model";
 import OrderModel from "../schema/Order.model";
 import { Member } from "../libs/types/member";
 import { Order, OrderInquiry, OrderItemInput, OrderUpdateInput } from "../libs/types/order";
-import { shapeIntoMongooseObject } from "../libs/config";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { ObjectId } from "mongoose";
 import { OrderStatus } from "../libs/enums/order.enum";
@@ -20,9 +20,9 @@ class OrderService {
     member: Member,
     input: OrderItemInput[],
   ): Promise<Order> {
-    const memberId = shapeIntoMongooseObject(member._id);
+    const memberId = shapeIntoMongooseObjectId(member._id);
     const amount = input.reduce((accumulator: number, item: OrderItemInput) => {
-      return accumulator + item.itemPrice * item.itemQuentity;
+      return accumulator + item.itemPrice * item.itemQuantity;
     }, 0);
     const delivery = amount < 100 ? 5 : 0;
     try {
@@ -47,7 +47,7 @@ class OrderService {
   ): Promise<void> {
     const promisedList = input.map(async (item: OrderItemInput) => {
       item.orderId = orderId;
-      item.productId = shapeIntoMongooseObject(item.productId);
+      item.productId = shapeIntoMongooseObjectId(item.productId);
       await this.orderItemModel.create(item);
       return "Inserted";
     });
@@ -59,7 +59,7 @@ class OrderService {
     member: Member,
     inquiry: OrderInquiry,
   ): Promise<Order[]> {
-    const memberId = shapeIntoMongooseObject(member._id);
+    const memberId = shapeIntoMongooseObjectId(member._id);
     const matches = { memberId: memberId, orderStatus: inquiry.orderStatus };
 
     const result = await this.orderModel
@@ -93,9 +93,9 @@ class OrderService {
   public async updateOrder(
     member:Member,
     input:OrderUpdateInput):Promise<Order>{
-        const memberId =shapeIntoMongooseObject(member._id),
-        orderId=shapeIntoMongooseObject(input.orderId),
-        orderStatus=input.orderStatus;
+        const memberId = shapeIntoMongooseObjectId(member._id),
+          orderId = shapeIntoMongooseObjectId(input.orderId),
+          orderStatus = input.orderStatus;
 
         const result = await this.orderModel.findByIdAndUpdate(
             {

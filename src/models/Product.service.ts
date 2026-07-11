@@ -1,4 +1,4 @@
-import { shapeIntoMongooseObject } from "../libs/config";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 import { ProductStatus } from "../libs/enums/product.enum";
 import { ViewGroup } from "../libs/enums/view.enum";
 import Errors, { HttpCode, Message } from "../libs/Errors";
@@ -47,7 +47,7 @@ return result
 public async getProduct(
     memberId:ObjectId , 
     id:string):Promise<Product>{
-    const productId = shapeIntoMongooseObject(id)
+    const productId = shapeIntoMongooseObjectId(id)
 
     let result = await this.productModel.findOne({
         _id:productId,
@@ -110,7 +110,7 @@ public async updateChosenProduct(
     id:string,
     input: ProductUpdateInput):
 Promise<Product>{
-id=shapeIntoMongooseObject(id)
+id=shapeIntoMongooseObjectId(id)
 const result =await this.productModel
 .findOneAndUpdate({_id: id}, input, {new:true})
 .exec();

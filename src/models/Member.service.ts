@@ -8,7 +8,7 @@ import {
 } from "../libs/types/member";
 import MemberModule from "../schema/Member.module";
 import bcrypt from "bcryptjs";
-import { shapeIntoMongooseObject } from "../libs/config";
+import { shapeIntoMongooseObjectId } from "../libs/config";
 
 class MemberService {
   private readonly memberModel;
@@ -58,7 +58,7 @@ class MemberService {
     return await this.memberModel.findById(member._id).lean().exec();
   }
   public async getMemberDetail(member: Member): Promise<Member> {
-    const memberId = shapeIntoMongooseObject(member._id);
+    const memberId = shapeIntoMongooseObjectId(member._id);
     const result = await this.memberModel
       .findOne({ _id: memberId, memberStatus: MemberStatus.ACTIVE })
       .exec();
@@ -70,7 +70,7 @@ class MemberService {
     member: Member,
     input: MemberUpdateInput,
   ): Promise<Member> {
-    const memberId = shapeIntoMongooseObject(member._id);
+    const memberId = shapeIntoMongooseObjectId(member._id);
     const result = await this.memberModel
       .findOneAndUpdate({ _id: memberId }, input, { new: true })
       .exec();
@@ -97,7 +97,7 @@ class MemberService {
     return result;
   }
   public async addUserPoint(member: Member, point: number): Promise<Member> {
-    const memberId = shapeIntoMongooseObject(member._id);
+    const memberId = shapeIntoMongooseObjectId(member._id);
 
     return await this.memberModel.findByIdAndUpdate({
       _id: memberId,
@@ -157,7 +157,7 @@ class MemberService {
     return result;
   }
   public async updateChosenUser(input: MemberUpdateInput): Promise<Member> {
-    input._id = shapeIntoMongooseObject(input._id);
+    input._id = shapeIntoMongooseObjectId(input._id);
     const result = await this.memberModel
       .findByIdAndUpdate({ _id: input._id }, input, { new: true })
       .exec();
