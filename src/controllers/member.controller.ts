@@ -16,8 +16,10 @@ const memberController: T = {};
 memberController.Signup = async (req: Request, res: Response) => {
   try {
     console.log("Signup");
-    const input: MemberInput = req.body,
-      result: Member = await memberService.Signup(input);
+    if(!req.file)throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED)
+    const input: MemberInput = req.body
+     input.memberImage = req.file.path
+     const result: Member = await memberService.Signup(input);
 
     const token = await authService.createToken(result);
 

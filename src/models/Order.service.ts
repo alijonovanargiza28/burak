@@ -10,27 +10,28 @@ import { OrderStatus } from "../libs/enums/order.enum";
 class OrderService {
   private readonly orderModel;
   private readonly orderItemModel;
-    memberService: any;
+  memberService: any;
 
   constructor() {
     this.orderModel = OrderModel;
     this.orderItemModel = OrderItemModel;
   }
   public async createOrder(
-    member: Member,
-    input: OrderItemInput[],
+    member: Member, //kim order hosil qilyabdi
+    input: OrderItemInput[], //nimani buyurtma qilyotgani
   ): Promise<Order> {
     const memberId = shapeIntoMongooseObjectId(member._id);
-    const amount = input.reduce((accumulator: number, item: OrderItemInput) => {
+    const amount = input.reduce((accumulator: number, item: OrderItemInput) => {//reduce darstavkamizni umumiy narxini hisobledi 2ta agrgumenti boladi initial vaue
       return accumulator + item.itemPrice * item.itemQuantity;
     }, 0);
     const delivery = amount < 100 ? 5 : 0;
     try {
       const newOrder: Order = await this.orderModel.create({
-        orderTotal: amount + delivery,
+        orderTotal: amount + delivery, //qiymati teng boladi
         orderDelivery: delivery,
-        memberId: memberId,
+        memberId: memberId, //kim murojat qilyotgani
       });
+      
       const orderId = newOrder._id;
       console.log("orderId", orderId);
       await this.recordOrderItem(orderId, input);
@@ -50,6 +51,7 @@ class OrderService {
       item.productId = shapeIntoMongooseObjectId(item.productId);
       await this.orderItemModel.create(item);
       return "Inserted";
+      
     });
     console.log("promisedList", promisedList);
     const orderItemsState = await Promise.all(promisedList);
@@ -91,28 +93,30 @@ class OrderService {
     return result;
   }
   public async updateOrder(
-    member:Member,
-    input:OrderUpdateInput):Promise<Order>{
-        const memberId = shapeIntoMongooseObjectId(member._id),
-          orderId = shapeIntoMongooseObjectId(input.orderId),
-          orderStatus = input.orderStatus;
+    member: Member,
+    input: OrderUpdateInput,
+  ): Promise<Order> {
+    const memberId = shapeIntoMongooseObjectId(member._id),
+      orderId = shapeIntoMongooseObjectId(input.orderId),
+      orderStatus = input.orderStatus;
 
-        const result = await this.orderModel.findByIdAndUpdate(
-            {
-                memberId:memberId,
-                _id:orderId
-            },
-            {orderStatus:orderStatus},
-            {new:true}
-        )
-        .exec();
-        if(!result)throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
+    const result = await this.orderModel
+      .findByIdAndUpdate(
+        {
+          memberId: memberId,
+          _id: orderId,
+        },
+        { orderStatus: orderStatus },
+        { new: true },
+      )
+      .exec();
+    if (!result) throw new Errors(HttpCode.NOT_MODIFIED, Message.UPDATE_FAILED);
 
-        if(orderStatus === OrderStatus.PROCESS){
-            await this.memberService.addUserPoint(member, 1)
-        }
-        return result
+    if (orderStatus === OrderStatus.PROCESS) {
+      await this.memberService.addUserPoint(member, 1);
     }
+    return result;
+  }
 }
 
 export default OrderService;

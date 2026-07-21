@@ -10,7 +10,8 @@ router.get("/member/restaurant", memberController.getRestaurant);
 
 router.post("/member/login", memberController.Login);
 
-router.post("/member/signup", memberController.Signup);
+router.post("/member/signup",  makeUploader("members").single("memberImage"),
+memberController.Signup);
 
 router.post(
   "/member/logout",
@@ -35,7 +36,7 @@ router.get("/member/top-users", memberController.getTopUsers);
 
 // PRODUCT
 
-router.get("/products/all", productController.getProducts);
+router.get("/product/all", productController.getProducts);
 
 router.get(
   "/product/:id",

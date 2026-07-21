@@ -14,7 +14,6 @@ productController.getProducts = async(req:Request, res:Response)=>{
     try{
         console.log("getProducts")
         const {order,page,limit, productCollection, search} = req.query
-        
         const inquery : ProductInquery = {//biz get orqali malumot yuboryogan paytda url ichidan foydalanamiz query and params
                                              //paramn urlni bir qismi aniq  bir malumotni olish uchun
             order:String(order),           //har qanday typda kelganini stringag query dan kelgan malumot
@@ -50,6 +49,8 @@ productController.getProduct =async(req:ExtendedRequest, res:Response)=>{
     try {
         console.log("getProduct");
         const {id} = req.params;
+
+        console.log("------",id)
         if (typeof id !== "string") {
           throw new Errors(HttpCode.BAD_REQUEST, Message.NO_DATA_FOUND);
         }
