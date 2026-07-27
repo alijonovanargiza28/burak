@@ -11,15 +11,19 @@ const authService = new AuthService();
 
 const memberController: T = {};
 
-//REACT
-//Sign UP
+//REACT Sign UP
 memberController.Signup = async (req: Request, res: Response) => {
   try {
     console.log("Signup");
-    if(!req.file)throw new Errors(HttpCode.BAD_REQUEST, Message.CREATE_FAILED)
-    const input: MemberInput = req.body
-     input.memberImage = req.file.path
-     const result: Member = await memberService.Signup(input);
+
+    const input: MemberInput = req.body;
+
+    // Agar rasm yuborilgan bo'lsa, saqlaymiz
+    if (req.file) {
+      input.memberImage = req.file.path;
+    }
+
+    const result: Member = await memberService.Signup(input);
 
     const token = await authService.createToken(result);
 
@@ -28,11 +32,18 @@ memberController.Signup = async (req: Request, res: Response) => {
       httpOnly: false,
     });
 
-    res.status(HttpCode.CREATED).json({ member: result, accessToken: token });
+    res.status(HttpCode.CREATED).json({
+      member: result,
+      accessToken: token,
+    });
   } catch (err) {
-    console.log("Error,Signup", err);
-    if (err instanceof Errors) res.status(err.code).json(err);
-    else res.status(Errors.standard.code).json(Errors.standard);
+    console.log("Error, Signup", err);
+
+    if (err instanceof Errors) {
+      res.status(err.code).json(err);
+    } else {
+      res.status(Errors.standard.code).json(Errors.standard);
+    }
   }
 };
 //LOGIN
