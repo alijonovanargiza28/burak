@@ -6,6 +6,7 @@ import { shapeIntoMongooseObjectId } from "../libs/config";
 import Errors, { HttpCode, Message } from "../libs/Errors";
 import { ObjectId } from "mongoose";
 import { OrderStatus } from "../libs/enums/order.enum";
+import MemberService from "./Member.service";
 
 class OrderService {
   private readonly orderModel;
@@ -15,6 +16,7 @@ class OrderService {
   constructor() {
     this.orderModel = OrderModel;
     this.orderItemModel = OrderItemModel;
+    this.memberService = new MemberService();
   }
   public async createOrder(
     member: Member, //kim order hosil qilyabdi
