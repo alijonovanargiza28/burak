@@ -2,10 +2,10 @@ import path from 'path';
 import multer from 'multer';
 const {v4} = require('uuid')
 
-function getTargetImageStorage (address: any) {
+function getTargetImageStorage (adress: any) {
 return multer.diskStorage ({
 destination: function (req, file, cb) {
-cb(null, `./uploads/${address}`);
+cb(null, `./uploads/${adress}`);
 },
 filename: function (req, file, cb) {
 const extension = path.parse (file.originalname).ext;
@@ -14,8 +14,8 @@ cb (null, random_name) ;
 },
 });
 }
-const makeUploader = (address: string)=> {
-const storage = getTargetImageStorage (address) ;
+const makeUploader = (adress: string)=> {
+const storage = getTargetImageStorage (adress) ;
 return multer({ storage: storage });
 }
 export default makeUploader;

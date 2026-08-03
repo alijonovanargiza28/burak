@@ -27,7 +27,7 @@ const memberSchema = new Schema(
       select: false,
       required: true,
     },
-    memberAddres: {
+    memberAdress: {
       type: String,
     },
     memberDesc: {
